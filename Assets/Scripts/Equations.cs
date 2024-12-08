@@ -5,7 +5,7 @@ using UnityEngine;
 public class Equations : MonoBehaviour
 {
     // HACER LA FORMULA Y CALCULAR LA ALTURA Y VELOCIDAD
-
+    //private float estimatedTime;
 
 
     void Start()
@@ -17,5 +17,10 @@ public class Equations : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void CalculateTime()
+    {
+        //estimatedTime = vo / g
     }
 }

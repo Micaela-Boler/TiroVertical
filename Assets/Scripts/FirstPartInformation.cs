@@ -5,46 +5,60 @@ using UnityEngine;
 
 public class FirstPartInformation : MonoBehaviour
 {
+    public float finalTargetVelocity;
     public float firstPartTime;
-    float maxHeight;
+    public float maxHeight;
 
-    [Header("TEXTS")]
+    [Header("SHOW VALUES")]
     [SerializeField] List<TextMeshProUGUI> texts;
+    [SerializeField] GameObject firstPartCanvas;
 
     [Header("TARGET")]
     public Target target;
 
     [Header("OTHER SCRIPTS")]
-    public ActualValues actualValues;
+    public CurrentValues actualValues;
+    public GameManager gameManager;
 
 
+
+    private void Start()
+    {
+        firstPartCanvas.SetActive(false);
+    }
 
     private void Update()
     {
-        GetMaxHeight();
+        UpdateInfo();
     }
 
 
-    private void GetMaxHeight()
+
+    private void UpdateInfo()
     {
         float currentHeight = target.transform.position.y;
 
         if (currentHeight > maxHeight)
         {
-            maxHeight = target.transform.position.y;
-            GetFirstPartTime();
-            UpdateText();  
-        }    
+            GetFirstPartInfo();   
+        }
+        else if (currentHeight < maxHeight -0.2 && gameManager.start)
+        {
+            firstPartCanvas.SetActive(true);
+            UpdateText();
+        }
     }
 
-    private void GetFirstPartTime()
+    private void GetFirstPartInfo()
     {
         firstPartTime = actualValues.time;
+        maxHeight = target.transform.position.y;
+        finalTargetVelocity = target.rb.velocity.y; 
     }
 
     public void UpdateText()
     {
-        texts[0].text = (maxHeight * 1).ToString("0.0");
-        texts[1].text = (firstPartTime * 1).ToString("0.0");
+        texts[0].text = (maxHeight * 1).ToString("0.0") + "m";
+        texts[1].text = (firstPartTime * 1).ToString("0.0") + "s";
     }
 }

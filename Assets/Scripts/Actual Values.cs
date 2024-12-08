@@ -6,7 +6,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class ActualValues : MonoBehaviour
+public class CurrentValues : MonoBehaviour
 {
     public float time;
     private float height;
@@ -45,7 +45,7 @@ public class ActualValues : MonoBehaviour
 
     private void UpdateText()
     {
-        actualTime.text = (time * 10).ToString("0");
+        actualTime.text = (time * 1).ToString("0.0");
         actualHeight.text = (height * 1).ToString("0.0");
         actualVelocity.text = (targetVelocity * 1).ToString("0.0");
     }

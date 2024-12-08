@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Target : MonoBehaviour
-{ 
+{
+    public float impactVelocity;
+
     [Header("JUMP")]
     public Rigidbody rb;
     private bool canJump;
 
     [Header("OTHER SCRIPTS")]
     public ChangeValues ChangeValues;
+    public GameManager GameManager;
 
 
 
@@ -33,12 +36,12 @@ public class Target : MonoBehaviour
 
 
     //FINALIZAR JUEGO
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
-
+            impactVelocity = rb.velocity.y;
+            GameManager.FinishSimulator();
         }   
     }
 }
