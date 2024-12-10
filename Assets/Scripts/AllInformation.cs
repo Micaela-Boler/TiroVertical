@@ -10,6 +10,7 @@ public class AllInformation : MonoBehaviour
     public ChangeValues changeValues;
     public Target target;
 
+
     [SerializeField] List<TextMeshProUGUI> vo;
     [SerializeField] List<TextMeshProUGUI> vf;
     [SerializeField] List<TextMeshProUGUI> time;
@@ -18,7 +19,10 @@ public class AllInformation : MonoBehaviour
     [SerializeField] TextMeshProUGUI gravity;
     [SerializeField] TextMeshProUGUI totalTime;
 
+    public ShotInformation shotInformation;
+    [SerializeField] TMP_InputField inputField;
     private float timeInfo;
+    private string shotName;
 
 
     public void UpdateAndShowInformation()
@@ -28,6 +32,7 @@ public class AllInformation : MonoBehaviour
         FreeFallInfo();
         VerticalShotInfo();
         GeneralInformation();
+        GetInfo();
     }
 
 
@@ -55,6 +60,37 @@ public class AllInformation : MonoBehaviour
     private void UpdateText(TextMeshProUGUI text , float value, string unit)
     {
         text.text = (value * 1).ToString("0.0") + unit;
+    }
+
+
+
+    public void GetShotName()
+    {
+       shotName = inputField.text;
+       Debug.Log("NOMBRE INGRESADO:" + shotName);
+    }
+
+    private void GetInfo()
+    {
+        shotInformation.a_shotName = shotName;
+
+        shotInformation.gravity = changeValues.gravity.value;
+        shotInformation.totalTime = currentValues.time;
+        shotInformation.maxHeight = firstPartInformation.maxHeight;
+
+        shotInformation.verticalShotTime = timeInfo;
+        shotInformation.verticalShotVo = changeValues.force.value;
+        shotInformation.verticalShotVf = firstPartInformation.finalTargetVelocity;
+
+        shotInformation.freeFallTime = currentValues.time - timeInfo;
+        shotInformation.freeFallVo = firstPartInformation.finalTargetVelocity;
+        shotInformation.freeFallVf = changeValues.force.value;
+    }
+    
+    public void SaveInformation()
+    {
+        GetInfo();
+        FindObjectOfType<Firebase>().PostData(shotInformation);
     }
     
 }
