@@ -2,15 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class AllInformation : MonoBehaviour
 {
+    private float timeInfo;
+
+    [SerializeField] GameObject informationElementPrefab;
+
+    [Header("SAVE DATA")]
+    [SerializeField] TMP_InputField inputField;
+    public ShotInformation shotInformation;
+    private string shotName;
+
+    [Header("OTHER SCRIPTS")]
     public FirstPartInformation firstPartInformation;
     public CurrentValues currentValues;
     public ChangeValues changeValues;
     public Target target;
 
-
+    [Header("TEXT")]
     [SerializeField] List<TextMeshProUGUI> vo;
     [SerializeField] List<TextMeshProUGUI> vf;
     [SerializeField] List<TextMeshProUGUI> time;
@@ -19,39 +31,28 @@ public class AllInformation : MonoBehaviour
     [SerializeField] TextMeshProUGUI gravity;
     [SerializeField] TextMeshProUGUI totalTime;
 
-    public ShotInformation shotInformation;
-    [SerializeField] TMP_InputField inputField;
-    private float timeInfo;
-    private string shotName;
 
 
     public void UpdateAndShowInformation()
     {
         timeInfo = firstPartInformation.firstPartTime;
 
-        FreeFallInfo();
-        VerticalShotInfo();
-        GeneralInformation();
+        AllShotInformation();
         GetInfo();
     }
 
 
-    private void FreeFallInfo()
+
+    private void AllShotInformation()
     {
         UpdateText(vo[1], firstPartInformation.finalTargetVelocity, "m/s");
         UpdateText(time[1], currentValues.time - timeInfo, "s");
         UpdateText(vf[1], changeValues.force.value, "m/s");
-    }
 
-    private void VerticalShotInfo()
-    {
         UpdateText(vo[0], changeValues.force.value, "m/s");
         UpdateText(time[0], timeInfo, "s");
         UpdateText(vf[0], firstPartInformation.finalTargetVelocity, "m/s");
-    }
 
-    private void GeneralInformation()
-    {
         UpdateText(totalTime, currentValues.time, "s");
         UpdateText(gravity, changeValues.gravity.value, "m/s2");
         UpdateText(height, firstPartInformation.maxHeight, "m");
@@ -63,16 +64,18 @@ public class AllInformation : MonoBehaviour
     }
 
 
-
-    public void GetShotName()
+    //SAVE DATA//
+    public void GetShotNameFromInputField() //ACTUALIZAR INPUT FIELD EN LA INTERFAZ
     {
        shotName = inputField.text;
        Debug.Log("NOMBRE INGRESADO:" + shotName);
+
     }
 
     private void GetInfo()
     {
         shotInformation.a_shotName = shotName;
+        Debug.Log("Shot info:" + shotInformation.a_shotName);
 
         shotInformation.gravity = changeValues.gravity.value;
         shotInformation.totalTime = currentValues.time;
@@ -92,5 +95,4 @@ public class AllInformation : MonoBehaviour
         GetInfo();
         FindObjectOfType<Firebase>().PostData(shotInformation);
     }
-    
 }

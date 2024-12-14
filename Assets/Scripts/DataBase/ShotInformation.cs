@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static DataTracker;
 
-public class ShotInformation : MonoBehaviour
+[System.Serializable]
+public class ShotInformation
 {
     public string a_shotName;
 

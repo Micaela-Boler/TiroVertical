@@ -2598,7 +2598,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1197411021}
         m_TargetAssemblyTypeName: AllInformation, Assembly-CSharp
-        m_MethodName: GetShotName
+        m_MethodName: GetShotNameFromInputField
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2692,7 +2692,6 @@ GameObject:
   m_Component:
   - component: {fileID: 382846036}
   - component: {fileID: 382846035}
-  - component: {fileID: 382846037}
   m_Layer: 0
   m_Name: Data base
   m_TagString: Untagged
@@ -2712,7 +2711,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed8487a0624a7841acd0a883dae9761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  simulatorName: Shot
 --- !u!4 &382846036
 Transform:
   m_ObjectHideFlags: 0
@@ -2728,28 +2726,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &382846037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 382846034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eae95e404f6468d49aa3f7fe66a131bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  a_shotName: 
-  gravity: 0
-  totalTime: 0
-  maxHeight: 0
-  verticalShotTime: 0
-  verticalShotVo: 0
-  verticalShotVf: 0
-  freeFallTime: 0
-  freeFallVo: 0
-  freeFallVf: 0
 --- !u!1 &385024055
 GameObject:
   m_ObjectHideFlags: 0
@@ -7310,6 +7286,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2bcbf5f379b0544912bce18b94a6e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  informationElementPrefab: {fileID: 0}
+  inputField: {fileID: 382407407}
+  shotInformation:
+    a_shotName: 
+    gravity: 0
+    totalTime: 0
+    maxHeight: 0
+    verticalShotTime: 0
+    verticalShotVo: 0
+    verticalShotVf: 0
+    freeFallTime: 0
+    freeFallVo: 0
+    freeFallVf: 0
   firstPartInformation: {fileID: 1197411019}
   currentValues: {fileID: 782245472}
   changeValues: {fileID: 782245470}
@@ -7326,8 +7315,6 @@ MonoBehaviour:
   height: {fileID: 2104486456}
   gravity: {fileID: 1197444457}
   totalTime: {fileID: 506316086}
-  shotInformation: {fileID: 382846037}
-  inputField: {fileID: 382407407}
 --- !u!1 &1197444455
 GameObject:
   m_ObjectHideFlags: 0
