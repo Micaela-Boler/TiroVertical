@@ -2,7 +2,7 @@ using Proyecto26;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.ReorderableList.Internal;
+//using Unity.VisualScripting.ReorderableList.Internal;
 using UnityEngine;
 using static DataTracker;
 
@@ -10,12 +10,6 @@ public class Firebase : MonoBehaviour
 {
     private string baseURL = "https://tirovertical-caidalibre-default-rtdb.firebaseio.com/";
     private string shotName;
-
-
-    private string BuildURL()
-    {
-        return baseURL + "/" + shotName  + ".json";
-    }
 
 
 
